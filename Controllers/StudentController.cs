@@ -3,12 +3,16 @@ using LibraryManagementSoftwareModels.Entities;
 using LibraryManagementSoftwareServices.IServices;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using LibraryManagementSoftwareModels.Business_Model;
 
 namespace LibraryManagementSoftware.Controllers
 {
-	public class StudentController(IStudentService studentService) : Controller
+    [Authorize]
+    public class StudentController(IStudentService studentService) : Controller
 	{
-		private IStudentService _studentService = studentService;
+        
+        private IStudentService _studentService = studentService;
 
 		public async Task<IActionResult> Index()
 		{
@@ -22,7 +26,7 @@ namespace LibraryManagementSoftware.Controllers
         }
 
         [HttpPost]
-		public async Task<IActionResult> Create(Student entity)
+		public async Task<IActionResult> Create(StudentViewModel entity)
 		{
 			if(entity == null)
 			{
@@ -48,7 +52,7 @@ namespace LibraryManagementSoftware.Controllers
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Update(Student entity)
+		public async Task<IActionResult> Update(StudentViewModel entity)
 		{
 			if(entity != null)
 			{

@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using LibraryManagementSoftwareModels.Entities;
 using LibraryManagementSoftwareServices.IServices;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementSoftware.Controllers
 {
-	public class StaffController( IStaffService staffServie) : Controller
+    [Authorize]
+    public class StaffController( IStaffService staffServie) : Controller
 	{
-		private IStaffService _staffService = staffServie;
+     
+        private IStaffService _staffService = staffServie;
 
 		public async Task<IActionResult> Index()
 		{

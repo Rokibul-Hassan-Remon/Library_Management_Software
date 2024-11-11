@@ -1,11 +1,14 @@
 ﻿
 using LibraryManagementSoftwareModels.Entities;
 using LibraryManagementSoftwareServices.IServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace LibraryManagementSoftware.Controllers
 {
-	public class BookController(IBookService bookService) : Controller
+    [Authorize]
+    public class BookController(IBookService bookService) : Controller
 	{
         private IBookService _bookService = bookService;
 

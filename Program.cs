@@ -4,7 +4,9 @@ using LibraryManagementSoftwareRepository.Repository;
 using LibraryManagementSoftwareServices.IServices;
 using LibraryManagementSoftwareServices.Services;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Identity;
+using LibraryManagementSoftwareModels.Entities;
+using LibraryManagementSoftwareServices.Additional;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,7 +14,20 @@ builder.Services.AddControllersWithViews();
 
 
 var con = builder.Configuration.GetConnectionString("LibraryManagementSoftware");
+
 builder.Services.AddDbContext<LibraryManagementDbContext>(x => x.UseSqlServer(con));
+
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+	.AddEntityFrameworkStores<LibraryManagementDbContext>()
+	.AddDefaultTokenProviders();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+	options.Password.RequireDigit = true;
+	options.Password.RequireLowercase = true; 
+	options.Password.RequireUppercase = true;
+	options.User.RequireUniqueEmail = true;
+});
 
 builder.Services.AddScoped<IBookService,     BookService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -26,6 +41,7 @@ builder.Services.AddScoped<ILoanRepository,    LoanRepository>();
 builder.Services.AddScoped<IStaffRepository,   StaffRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 
+builder.Services.AddAutoMapper(typeof(MappinProfile));
 
 var app = builder.Build();
 

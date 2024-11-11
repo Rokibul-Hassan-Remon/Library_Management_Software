@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using LibraryManagementSoftwareServices.IServices;
 using LibraryManagementSoftwareModels.Entities;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LibraryManagementSoftware.Controllers
 {
-	public class LoanController( ILoanService loanService ) : Controller
+    [Authorize]
+    public class LoanController( ILoanService loanService ) : Controller
 	{
 		private ILoanService _studentService = loanService;
 

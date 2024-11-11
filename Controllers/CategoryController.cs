@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using LibraryManagementSoftwareModels.Entities;
+﻿using LibraryManagementSoftwareModels.Entities;
 using LibraryManagementSoftwareServices.IServices;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryManagementSoftware.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
-    {
+    {        
         private ICategoryService _categoryservice;
 
         public CategoryController(ICategoryService categoryservice)
