@@ -22,7 +22,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 	.AddDefaultTokenProviders();
 
 
-
+*/asdfjlka*/
 builder.Services.Configure<IdentityOptions>(options =>
 {
 	options.Password.RequireDigit = true;
