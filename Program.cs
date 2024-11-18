@@ -21,6 +21,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
 	.AddEntityFrameworkStores<LibraryManagementDbContext>()
 	.AddDefaultTokenProviders();
 
+
+
 builder.Services.Configure<IdentityOptions>(options =>
 {
 	options.Password.RequireDigit = true;
